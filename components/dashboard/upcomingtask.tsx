@@ -72,7 +72,7 @@ export default function UpcomingTasks() {
   const renderTaskCard = (task: any) => (
     <div 
       key={task.id} 
-      className="bg-neutral-50 border border-neutral-200 rounded-lg p-3 min-w-[240px] flex-shrink-0 cursor-pointer"
+      className="bg-neutral-50 flex-1 md:flex-none border border-neutral-200 rounded-lg p-3 min-w-[240px] flex-shrink-0 cursor-pointer"
       onClick={() => onTaskSelect(task.id)}
     >
       <div className="flex items-center justify-between mb-2">
@@ -205,14 +205,14 @@ export default function UpcomingTasks() {
                 <h3 className="text-sm font-medium text-neutral-500 mb-2">
                   Tomorrow - {format(tomorrow, "MMM dd")}
                 </h3>
-                <div className="flex flex-nowrap overflow-x-auto pb-2 scrollbar-hide gap-4">
+                <div className="flex flex-wrap  pb-2  gap-4 ">
                   {tomorrowTasks.map(renderTaskCard)}
-                  <div className="flex items-start justify-center">
-                  {moreTomorrow?  <Link  href={{
+                 
+                  {moreTomorrow? <div className="block lg:flex items-start justify-center "> <Link  href={{
     pathname: '/dashboard/calendar',
     query: { datefind: tomorrow.toDateString() },
-  }}><Badge className="flex gap-2">View More <CircleChevronRight/> </Badge></Link> :<Badge>No More ..</Badge> }
-                  </div>
+  }}> <Badge className="flex gap-2">View More <CircleChevronRight/> </Badge></Link>  </div>:'' }
+                 
                 </div>
               </div>
             )}
@@ -222,11 +222,11 @@ export default function UpcomingTasks() {
                 <h3 className="text-sm font-medium text-neutral-500 mb-2">
                   {format(dayAfterTomorrow, "MMM dd")} - {format(dayAfterTomorrow, "EEEE")}
                 </h3>
-                <div className="flex flex-nowrap overflow-x-auto pb-2 scrollbar-hide gap-4">
+                <div className="flex flex-wrap  pb-2  gap-4 ">
                   {dayAfterTomorrowTasks.map(renderTaskCard)}
-                  <div className="flex items-start justify-center">
-                  {moreTomorrow? <Link href={"/dashboard/calendar"}> <Badge className="flex gap-2">View More <CircleChevronRight/> </Badge> </Link>:<Badge>No More ..</Badge> }
-                  </div>
+                 
+                  {moreTomorrow? <div className="block lg:flex items-start justify-center"> <Link href={"/dashboard/calendar"}> <Badge className="flex gap-2">View More <CircleChevronRight/> </Badge> </Link></div>:'' }
+                  
                 </div>
               </div>
             )}

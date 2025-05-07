@@ -37,7 +37,7 @@ export default async function ProtectedPage() {
           <TaskCards badgecolor={''} symbol={null} symbolleft={false} title={'Tasks Completed'} des={'tasks on all projects Completed view here.'} badge={''} alltask="20" completed="13" />
           <TaskCards badgecolor={'bg-yellow-100/40'} symbol={'$'} symbolleft={false} title={'Total Amount'} des={'total amounts on all projects and paied .'} badge={'on Tracker'} alltask="10000" completed="300" />
         </div>
-        <div className="relative flex flex-col gap-5 max-w-3/4">
+        <div className=" flex flex-col gap-5 ">
           <TodayTasks />
           <UpcomingTasks  />
           {/* tasks={Array()} onTaskSelect={onTaskSelect} */}
