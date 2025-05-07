@@ -7,6 +7,107 @@ import { Client } from "@/utils/supabase/types";
 import path from "path"
 import fs from 'fs/promises';
 
+export async function GET(request: any){
+  const supabase = await createClient()
+  const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    try{
+   
+      const { data,error } = await supabase
+      .from("workspace")
+      .select('title,id').eq("userId", user?.id||'').eq('is_del', false).order("created_at",{ascending:false})
+  
+  
+    if (error) {
+     
+  
+      return NextResponse.json({
+          message: error,
+          type: 'error',
+          success: false
+          
+      })
+    }
+  
+  //   return data
+        // revalidatePathLocale("/dashboard/account")
+        return NextResponse.json({
+          message: 'Success',
+          success: true,
+          type: 'success',
+          data:data
+        })
+     
+     }catch(err){
+     
+       return NextResponse.json({
+         message: err,
+         type: 'error',
+         success: false
+         
+     })
+     
+     }
+    
+}
+export async function POST(request:any) {
+  
+    
+  const { title} = await request.json();
+  const supabase = await createClient()
+  const util = require('util')
+  const {
+      data: { user },
+    } = await supabase.auth.getUser();
+try{
+   
+  const { data,error } = await supabase
+  .from("workspace")
+  .insert({
+    title: title,
+    userId:user?.id,
+  })
+
+
+if (error) {
+ 
+
+  return NextResponse.json({
+      message: error,
+      type: 'error',
+      success: false
+      
+  })
+}
+
+//   return data
+    // revalidatePathLocale("/dashboard/account")
+    return NextResponse.json({
+      message: 'Success',
+      success: true,
+      type: 'success',
+     
+    })
+ 
+ }catch(err){
+ 
+   return NextResponse.json({
+     message: err,
+     type: 'error',
+     success: false
+     
+ })
+ 
+ }
+
+
+}
+
+// export async function GET() { ... }
+// export async function POST() { ... }
+
 export  const CretaeClient=async(item:Client)=> {
   
     
@@ -252,7 +353,7 @@ export  const UpdateClient=async(item:Client)=> {
   const { data, error } = await supabase
   .from('clients')
   .update(UpdateData)
-  .eq('id', item.id||'') 
+  .eq('id', item.id||0) 
   .select()
   
     if (error) {
