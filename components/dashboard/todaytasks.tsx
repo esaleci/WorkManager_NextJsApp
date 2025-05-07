@@ -11,7 +11,7 @@ import {
 
 import { useCallback, useEffect, useState } from "react"
 import { Badge } from "../ui/badge";
-import { Skeleton } from "../ui/skeleton";
+
 import { Separator } from "../ui/separator";
 import { Filter,EllipsisVertical,ArrowUpNarrowWide, Paperclip, MessageSquare, PlusCircle, User } from "lucide-react";
 import { Button } from "../ui/button";
@@ -21,6 +21,7 @@ import { formatTime } from "@/utils/tools";
 import { useToast } from "../hooks/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
 import { GetTasksViaClients } from "@/app/api/tasks/route";
+import { Skeleton } from "../ui/skeleton";
 
 interface TodaysTasksProps {
     tasks: [];
@@ -109,7 +110,7 @@ export function TodayTasks() {
         </CardHeader>
         <CardContent className="px-5 py-3 flex flex-col gap-5 items-center">
         {isloading ?
-        <div className="flex flex-col gap-4 p-5">
+        <div className="flex w-full flex-col gap-4 p-5">
           <Skeleton className="w-[50%] h-[20px] rounded-full" />
           <Skeleton className="w-[90%] h-[20px] rounded-full" />
           <Skeleton className="w-[20%] h-[20px] rounded-full" />
